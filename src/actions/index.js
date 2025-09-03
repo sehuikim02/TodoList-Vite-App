@@ -6,7 +6,7 @@ const apiUrl = `${BASE_URL}/todos`;
 //Action type 정의
 export const FETCH_TODOS = "FETCH_TODOS";
 export const ADD_TODO = "ADD_TODO";
-export const TOGGLE_TODO = "TOGLE_TODO";
+export const TOGGLE_TODO = "TOGGLE_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
 
 //TodoList Action 함수
@@ -24,10 +24,10 @@ export const fetchAllTodos = () => {
     }
 }; //fetchAllTodos
 
-// Todo 등록하는 action 함수
+//Todo 등록 Action 함수
 export const addTodo = (todo) => {
     return (dispatch) => {
-        axios.post(apiUrl, todo)    // post라서 data도 같이 전달함
+        axios.post(apiUrl, todo)
             .then(res => {
                 dispatch({
                     type: ADD_TODO,
@@ -39,12 +39,12 @@ export const addTodo = (todo) => {
                 throw (error);
             })
     }
-}//addTodo
+}; //addTodo
 
-// Todo 토글링 Action 함수
+//Todo 토글링 Action 함수
 export const toggleTodo = todo => {
     return (dispatch) => {
-        axios.patch(`${apiUrl}/${todo.id}`, todo)   // backend가 patch여서 맞춰줘야함
+        axios.patch(`${apiUrl}/${todo.id}`, todo)
             .then(res => {
                 dispatch({
                     type: TOGGLE_TODO,
@@ -56,9 +56,9 @@ export const toggleTodo = todo => {
                 throw (error);
             })
     }
-}//toggleTodo
+};
 
-// /Todo 삭제 Action 함수
+//Todo 삭제 Action 함수
 export const removeTodo = id => {
     return (dispatch) => {
         axios.delete(`${apiUrl}/${id}`)
@@ -73,4 +73,4 @@ export const removeTodo = id => {
                 throw (error);
             })
     }
-}//removeTodo
+}
