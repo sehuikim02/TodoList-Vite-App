@@ -2,8 +2,15 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
+import { connect } from 'react-redux'
+import { fetchAllTodos } from '../actions'
+
 // app.jsx에서 전달한 배열들로 펼쳐서 TodoItem.jsx에 전달
 class TodoItemList extends Component {
+    componentDidMount() {
+        this.props.getTodos();
+    }
+
     /*
         true 리턴 (myTodos 변수에 변동이 있는 경우) 이면 render 함수 다시 호출
         false 리턴 (myTodos 변수에 변동이 없는 경우) 이면, render 함수 다시 호출 X (랜더링 생략)
@@ -13,7 +20,7 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { myTodos, myToggle, myRemove } = this.props;
+        const { myTodos } = this.props;
         /* 
             const { id, text, checked } = todos;     
         */
@@ -21,8 +28,6 @@ class TodoItemList extends Component {
             <TodoItem id={id}
                 text={text}
                 checked={checked}
-                onToggle={myToggle}
-                onRemove={myRemove}
                 key={id}
             />
         ));
@@ -37,7 +42,12 @@ class TodoItemList extends Component {
 
 TodoItemList.propTypes = {
     myTodos: PropTypes.array,
-    myToggle: PropTypes.func,
-    myRemove: PropTypes.func
+    getTodos: PropTypes.func
 };
-export default TodoItemList;
+
+export default connect(
+    // store에 저장된 todos property를 가져와서 myTodos에 매핑하기
+    (state) => ( {myTodos: state.todos} ), 
+    // action 함수를 dispatch 하는 함수를 fetchAllTodos property에 매핑
+    { getTodos: fetchAllTodos }   // fetchAllTodos property에 매핑한다면, { fetchAllTodos: fetchAllTodos }
+)(TodoItemList);
