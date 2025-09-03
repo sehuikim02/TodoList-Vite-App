@@ -1,6 +1,6 @@
 import * as types from '@/actions';
 
-// 상태 변수를 포함하는 state 객체
+//State 객체
 const initialState = {
     todos: [
         {
@@ -10,8 +10,7 @@ const initialState = {
         }
     ]
 }
-
-// Reducer 함수
+//Reducer 함수
 export const toDoReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.REMOVE_TODO:
@@ -22,4 +21,4 @@ export const toDoReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
