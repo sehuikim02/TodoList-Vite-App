@@ -1,13 +1,13 @@
-import { Component } from 'react';
-import Form from '@/components/Form';
-import TodoItemList from '@/components/TodoItemList';
-import TodoListTemplate from '@/components/TodoListTemplate';
+import { Component } from 'react'; 
+import Form from '@components/Form';
+import TodoItemList from '@components/TodoItemList';
+import TodoListTemplate from '@components/TodoListTemplate';
 
 class App extends Component {
   render() {
     return (
       <TodoListTemplate form={<Form />}>
-        <TodoItemList />
+        <TodoItemList  />
       </TodoListTemplate>
     );
   } //render
